@@ -1,43 +1,48 @@
-package com.example.dogscollection.ui.fragments.breeds
+package com.example.dogscollection.ui.fragments.dogs
 
-import android.app.AlertDialog
 import android.os.Bundle
-import android.view.*
 import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dogscollection.R
 import com.example.dogscollection.adapters.BreedsAdapter
+import com.example.dogscollection.adapters.DogsAdapter
 import com.example.dogscollection.databinding.FragmentBreedsListBinding
+import com.example.dogscollection.databinding.FragmentDogsListBinding
+import com.example.dogscollection.ui.fragments.breeds.BreedsListViewModel
 import com.example.dogscollection.utils.NetworkResult
 import kotlinx.coroutines.launch
 
-class BreedsListFragment : Fragment() {
+class DogsListFragment : Fragment() {
 
-    private var _binding: FragmentBreedsListBinding? = null
+    private val args by navArgs<DogsListFragmentArgs>()
+
+    private var _binding: FragmentDogsListBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: BreedsListViewModel
+    private lateinit var viewModel: DogsListViewModel
 
-    private val mAdapter by lazy { BreedsAdapter() }
+    private val mAdapter by lazy { DogsAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity()).get(BreedsListViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(DogsListViewModel::class.java)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentBreedsListBinding.inflate(inflater, container, false)
+        _binding = FragmentDogsListBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
 
         setupRecyclerView()
-        setHasOptionsMenu(true)
 
         lifecycleScope.launch {
             requestApiData()
@@ -47,14 +52,14 @@ class BreedsListFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        binding.breedsRecyclerView.adapter = mAdapter
-        binding.breedsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.dogsRecyclerView.adapter = mAdapter
+        binding.dogsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         showShimmerEffect()
     }
 
     private fun requestApiData() {
-        viewModel.getBreedsList()
-        viewModel.breeds.observe(viewLifecycleOwner) { response ->
+        viewModel.getDogsList(args.breed)
+        viewModel.dogs.observe(viewLifecycleOwner) { response ->
             when(response) {
                 is NetworkResult.Success -> {
                     hideShimmerEffect()
@@ -72,31 +77,11 @@ class BreedsListFragment : Fragment() {
     }
 
     private fun showShimmerEffect() {
-        binding.breedsRecyclerView.showShimmer()
+        binding.dogsRecyclerView.showShimmer()
     }
 
     private fun hideShimmerEffect() {
-        binding.breedsRecyclerView.hideShimmer()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.main_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.main_menu) {
-            displayInfoAlertDialog()
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun displayInfoAlertDialog() {
-        val dialogBuilder = AlertDialog.Builder(requireContext())
-        dialogBuilder.setMessage("German Hernandez del Rosario").setCancelable(true)
-
-        val alert = dialogBuilder.create()
-        alert.setTitle("Created By")
-        alert.show()
+        binding.dogsRecyclerView.hideShimmer()
     }
 
     override fun onDestroyView() {

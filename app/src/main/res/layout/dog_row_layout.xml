@@ -6,24 +6,25 @@
     <data>
 
         <variable
-            name="breed"
+            name="dogImage"
             type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/breedRowLayout"
-        onBreedClickListener="@{breed}"
+        android:id="@+id/dogRowLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="6dp">
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp">
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/breedRowCardView"
+            android:id="@+id/dogCardView"
             style="@style/BreedRowCardViewStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -32,18 +33,18 @@
                 android:layout_height="match_parent"
                 android:background="@color/cardBackgroundColor">
 
-                <TextView
-                    android:id="@+id/postRowTitle"
-                    style="@style/BreedRowTitleStyle"
+                <ImageView
+                    loadImageFromUrl="@{dogImage}"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@{breed.toUpperCase()}"
+                    android:layout_height="200dp"
+                    android:scaleType="centerCrop"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Reddit post example title" />
+                    tools:srcCompat="@tools:sample/avatars" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

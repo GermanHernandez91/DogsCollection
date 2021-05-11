@@ -3,11 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
+    android:label="@string/dogs_list"
     app:startDestination="@id/breedsListFragment">
 
     <fragment
         android:id="@+id/breedsListFragment"
         android:name="com.example.dogscollection.ui.fragments.breeds.BreedsListFragment"
         android:label="@string/breeds_list"
-        tools:layout="@layout/fragment_breeds_list" />
+        tools:layout="@layout/fragment_breeds_list">
+        <action
+            android:id="@+id/action_breedsListFragment_to_dogsListFragment"
+            app:destination="@id/dogsListFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/dogsListFragment"
+        android:name="com.example.dogscollection.ui.fragments.dogs.DogsListFragment"
+        android:label="@string/dogs_list"
+        tools:layout="@layout/fragment_dogs_list">
+        <action
+            android:id="@+id/action_dogsListFragment_to_breedsListFragment"
+            app:destination="@id/breedsListFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right" />
+        <argument
+            android:name="breed"
+            app:argType="string" />
+    </fragment>
 </navigation>
