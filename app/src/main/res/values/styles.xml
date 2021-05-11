@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomActionBarStyle" parent="Widget.MaterialComponents.ActionBar.Primary">
+        <item name="background">@color/actionBarBackgroundColor</item>
+    </style>
+
+    <!-- Breed Card View Styles -->
+    <style name="BreedRowCardViewStyle">
+        <item name="cardCornerRadius">10dp</item>
+        <item name="strokeColor">@color/strokeColor</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+    </style>
+
+    <style name="BreedRowTitleStyle">
+        <item name="android:ellipsize">end</item>
+        <item name="maxLines">2</item>
+        <item name="android:textColor">@color/titleColor</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_margin">16dp</item>
+    </style>
+</resources>

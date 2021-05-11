@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- DARK THEME -->
+    <color name="backgroundColor">@color/lightGray</color>
+    <color name="placeholderColor">@color/mediumGray</color>
+
+    <!-- CUSTOM CARD VIEW STYLE -->
+    <color name="strokeColor">@color/mediumGray</color>
+    <color name="cardBackgroundColor">@color/darker</color>
+    <color name="cardBackgroundLightColor">#106200EA</color>
+    <color name="titleColor">@color/white</color>
+
+    <color name="statusBarColor">@color/black</color>
+    <color name="contextualStatusBarColor">@color/black</color>
+    <color name="contextualActionBarColor">@color/darker</color>
+    <color name="actionBarBackgroundColor">@color/darker</color>
+</resources>
