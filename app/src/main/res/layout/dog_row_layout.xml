@@ -36,7 +36,8 @@
                 <ImageView
                     loadImageFromUrl="@{dogImage}"
                     android:layout_width="0dp"
-                    android:layout_height="200dp"
+                    android:layout_height="@dimen/image_height"
+                    android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

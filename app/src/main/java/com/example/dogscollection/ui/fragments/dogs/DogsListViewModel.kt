@@ -28,12 +28,12 @@ class DogsListViewModel @Inject constructor(
     }
 
     private suspend fun getDogsSafeCall(breed: String) {
-        _dogs.value = NetworkResult.Loading()
+        _dogs.postValue(NetworkResult.Loading())
         try {
             val response = repository.remote.getRandomDogsByBreed(breed)
-            _dogs.value = handleResponse(response)
+            _dogs.postValue(handleResponse(response))
         } catch (e: Exception) {
-            _dogs.value = NetworkResult.Error("Dogs not found")
+            _dogs.postValue(NetworkResult.Error("Dogs not found"))
         }
     }
 
